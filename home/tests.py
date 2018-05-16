@@ -47,10 +47,12 @@ class TestSeguridad(unittest.TestCase):
         credenciales = {
             'correo@correo.com': ['passBueno123', 'passBueno123', ''],
             'correo@correo': ['passBueno123', 'passBueno123', correo_invalido],
-            'correo@correo.com': ['passPass', 'passPass', clave_invalida],
-            'correo@correo.com': ['passBueno12', 'passBueno123', claves_distintas],
+            'correo2@correo.com': ['passPass', 'passPass', clave_invalida],
+            'correo3@correo.com': ['passBueno12', 'passBueno123', claves_distintas],
         }
 
         for correo in credenciales:
             password1, password2, msg = credenciales[correo]
             self.assertEqual(seguridad.registrarUsuario(correo, password1, password2), msg)
+
+        self.assertTrue(len(seguridad.usuariosRegistrados.keys()) == 1)
