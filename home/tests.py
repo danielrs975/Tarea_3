@@ -8,14 +8,13 @@ class TestSeguridad(unittest.TestCase):
 
     def test_correo_valido(self):
         seguridad = Seguridad()
-        fail_msg = 'Correo electrónico inválido'
         correos = {
-            'anita-lavaba-latinahola@gmail-usb.ve': '',
-            'anita-lavaba- latinahola@gmail-usb.ve': fail_msg,
-            'correo@coreeo': fail_msg,
-            'coreo@coreeo.com': '',
-            'correo@correo.com.com': '',
-            '    @correo.com': fail_msg
+            'anita-lavaba-latinahola@gmail-usb.ve': True,
+            'anita-lavaba- latinahola@gmail-usb.ve': False,
+            'correo@coreeo': False,
+            'coreo@coreeo.com': True,
+            'correo@correo.com.com': True,
+            '    @correo.com': False
         }
         for key in correos:
             self.assertEqual(seguridad.correo_valido(key), correos[key])
@@ -25,18 +24,17 @@ class TestSeguridad(unittest.TestCase):
         # No carcteres especiales
         # Al menos 3 letras y almenos una de ellas debe ser mayuscula
         # contener al menos un digito
-        fail_msg = 'Clave inválida'
         seguridad = Seguridad()
         passwords = {
-            'a'*7: fail_msg, # muy corta
-            'a'*17: fail_msg, # muy larga
-            'a'*18: fail_msg, # muy larga
-            '1a'*5: fail_msg, # Al menos una mayuscula
-            'aA'*4: fail_msg, # Al menos un digito
-            '$abC123abC': fail_msg, # no caracteres especiales
-            '_abC123abC': fail_msg, # no caracteres especiales
-            '$abC123abC': fail_msg, # no caracteres especiales
-            'PasswordCo123': '',
+            'a'*7: False, # muy corta
+            'a'*17: False, # muy larga
+            'a'*18: False, # muy larga
+            '1a'*5: False, # Al menos una mayuscula
+            'aA'*4: False, # Al menos un digito
+            '$abC123abC': False, # no caracteres especiales
+            '_abC123abC': False, # no caracteres especiales
+            '$abC123abC': False, # no caracteres especiales
+            'PasswordCo123': True,
         }
         for key in passwords:
             self.assertEqual(seguridad.clave_valida(key), passwords['key'])
