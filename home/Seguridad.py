@@ -8,13 +8,28 @@ class Seguridad():
     
     # Metodo para registrar un usuario
     def registrarUsuario(self, correo, clave, repetirClave):
-        pass
+        # Analizar si el correo tiene el formato correcto 
+        if not self.correo_valido(correo):
+            return 'Correo electrónico inválido'
+        
+        # Analizar tiene el formato correcto 
+        if not self.clave_valida(clave):
+            return 'Clave inválida'
+        
+        # Ve si las clave y la confirmacion de la clave son iguales
+        if clave != repetirClave:
+            return 'Claves distintas'
+        
+        # Si pasa las verificaciones anteriores se agrega al diccionario 
+        self.usuariosRegistrados[correo] = clave
+        return ''
     
     # Metodo para ingresar al sistema
     def ingresarUsuario(self, correo, clave):
         pass
     
     def correo_valido(self, correo):
+        # Se realiza a traves de expresiones regulares 
         patron = re.compile('^[(a-z0-9\_\-\.)]+@[(a-z0-9\_\-\.)]+\.[(a-z)]{2,15}$')
         
         if patron.match(correo) == None:
