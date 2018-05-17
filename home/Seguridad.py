@@ -25,7 +25,7 @@ class Seguridad():
         if correo in self.usuariosRegistrados:
             return 'Este usuario ya existe'
         # Si pasa las verificaciones anteriores se agrega al diccionario
-        self.usuariosRegistrados[correo] = clave
+        self.usuariosRegistrados[correo] = clave[::-1]
         return ''
 
     # Metodo para ingresar al sistema
@@ -35,7 +35,7 @@ class Seguridad():
             return 'Usuario inválido'
 
         # Verificar que la clave corresponda con el correo 
-        if self.usuariosRegistrados[correo] != clave:
+        if self.usuariosRegistrados[correo] != clave[::-1]:
             return 'Clave inválida'
 
         return 'Usuario aceptado'

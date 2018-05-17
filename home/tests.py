@@ -60,6 +60,8 @@ class TestSeguridad(unittest.TestCase):
             seguridad.registrarUsuario('correo@correo.com', 'passBueno123', 'passBueno123'),
             'Este usuario ya existe'
             )
+        self.assertTrue(seguridad.usuariosRegistrados['correo@correo.com'] == '321oneuBssap')
+
 
     def test_ingresar_usuario(self):
         seguridad = Seguridad()
