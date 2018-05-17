@@ -53,6 +53,25 @@ class TestSeguridad(unittest.TestCase):
 
         for correo in credenciales:
             password1, password2, msg = credenciales[correo]
-            self.assertEqual(seguridad.registrarUsuario(correo, password1, password2), msg)
+            self.assertEqual(seguridad3.registrarUsuario(correo, password1, password2), msg)
 
-        self.assertTrue(len(seguridad.usuariosRegistrados.keys()) == 1)
+        self.assertTrue(len(seguridad3.usuariosRegistrados.keys()) == 1)
+
+    def test_ingresar_usuario(self):
+        seguridad = Seguridad()
+        correos_pass = {
+            'correo1@correo1.com': ['passPass123', 'passPass123'],
+            'correo2@correo1.com': ['passPass123', 'passPass123'],
+            'correo3@correo1.com': ['passPass123', 'passPass123']
+        }
+        for correo in correos_pass:
+            pass1, pass2 = correos_pass[correo]
+            seguridad.registrarUsuario(correo, pass1, pass2)
+
+        usuario_aceptado = 'Usuario aceptado'
+        usuario_invalido = 'Usuario inválido'
+        clave_invalida = 'Clave inválida'
+        self.assertEqual(seguridad.ingresarUsuario('correo1@correo1.com', 'passPass123'), usuario_aceptado)
+        self.assertEqual(seguridad.ingresarUsuario('correo1@correo1.com', 'p'), clave_invalida)
+        self.assertEqual(seguridad.ingresarUsuario('correo1@correo2.com', 'passPass12'), usuario_invalido)
+        self.assertEqual(seguridad.ingresarUsuario('correo1@correo3.com', 'p'), usuario_invalido)
