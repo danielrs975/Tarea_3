@@ -14,11 +14,13 @@ def home(request):
 
 def register(request):
     error = ''
+    print(seguridad.usuariosRegistrados)
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             clave = form.cleaned_data['clave']
+            print(clave)
             clave_conf = form.cleaned_data['conf_clave']
             error = seguridad.registrarUsuario(email, clave, clave_conf)
     else:
