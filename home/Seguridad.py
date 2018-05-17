@@ -27,7 +27,16 @@ class Seguridad():
 
     # Metodo para ingresar al sistema
     def ingresarUsuario(self, correo, clave):
-        pass
+        # Verificar que el correo existe en el diccionario
+        if not (correo in self.usuariosRegistrados):
+            return 'Usuario inválido'
+
+        # Verificar que la clave corresponda con el correo 
+        if self.usuariosRegistrados[correo] != clave:
+            return 'Clave inválida'
+
+        return 'Usuario aceptado'
+
 
     def correo_valido(self, correo):
         # Se realiza a traves de expresiones regulares
