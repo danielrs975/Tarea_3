@@ -1,0 +1,9 @@
+{% extends "home/base.html" %}
+{% block title %}
+Login system
+{% endblock title %}
+
+{% block content %}
+<a href="{% url 'home:login' %}">Ingresar al Sistema</a>
+<a href="{% url 'home:register' %}">Registrarse</a>
+{% endblock content %}
