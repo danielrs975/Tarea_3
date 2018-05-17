@@ -23,3 +23,7 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError(mensaje)
 
         return clave_conf
+
+class IngresarForm(forms.Form):
+    email = forms.EmailField(label='Correo electronico')
+    clave = forms.CharField(widget=forms.PasswordInput, label='Contraseña')

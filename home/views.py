@@ -1,14 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse
-from .Seguridad import Seguridad 
+from .Seguridad import Seguridad
 
-from .forms import RegisterForm
+from .forms import RegisterForm, IngresarForm
+import urllib
 
 seguridad = Seguridad()
 
 # Create your views here.
 def home(request):
-    return render(request, 'home/index.html')
+    nombre = request.GET.get('nombre', 'Anonimo')
+    return render(request, 'home/index.html', {'nombre': nombre})
 
 def register(request):
     error = ''
@@ -24,5 +26,18 @@ def register(request):
     return render(request, 'home/registro.html', context={'form':form, 'error': error})
 
 def login(request):
-    return HttpResponse('')
-    
+    error = ''
+    print(seguridad.usuariosRegistrados)
+    if request.method == 'POST':
+        form = IngresarForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            clave = form.cleaned_data['clave']
+            error = seguridad.ingresarUsuario(email, clave)
+            if error == 'Usuario aceptado':
+                return redirect(reverse('home:home') + '?nombre=' + email)
+    else:
+        form = IngresarForm()
+
+    form = IngresarForm()
+    return render(request, 'home/ingresar.html', context={'form':form, 'error': error})

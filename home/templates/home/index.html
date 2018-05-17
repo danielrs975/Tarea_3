@@ -4,6 +4,7 @@ Login system
 {% endblock title %}
 
 {% block content %}
+<h1>Hola {{nombre}}</h1>
 <a href="{% url 'home:login' %}">Ingresar al Sistema</a>
 <a href="{% url 'home:register' %}">Registrarse</a>
 {% endblock content %}
