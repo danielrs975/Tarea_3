@@ -49,7 +49,8 @@ class TestSeguridad(unittest.TestCase):
             'correo@correo': ['passBueno123', 'passBueno123', correo_invalido],
             'correo2@correo.com': ['passPass', 'passPass', clave_invalida],
             'correo3@correo.com': ['passBueno12', 'passBueno123', claves_distintas],
-            '': ['passBueno123', 'passBueno123', correo_invalido ]
+            '': ['passBueno123', 'passBueno123', correo_invalido ],
+            '': ['','', correo_invalido]
         }
 
         for correo in credenciales:
