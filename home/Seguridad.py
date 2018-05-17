@@ -21,6 +21,9 @@ class Seguridad():
         if clave != repetirClave:
             return 'Claves distintas'
 
+        # Verificar que el correo existe en el diccionario
+        if correo in self.usuariosRegistrados:
+            return 'Este usuario ya existe'
         # Si pasa las verificaciones anteriores se agrega al diccionario
         self.usuariosRegistrados[correo] = clave
         return ''

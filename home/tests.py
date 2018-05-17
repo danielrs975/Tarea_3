@@ -56,6 +56,10 @@ class TestSeguridad(unittest.TestCase):
             self.assertEqual(seguridad.registrarUsuario(correo, password1, password2), msg)
 
         self.assertTrue(len(seguridad.usuariosRegistrados.keys()) == 1)
+        self.assertEqual(
+            seguridad.registrarUsuario('correo@correo.com', 'passBueno123', 'passBueno123'),
+            'Este usuario ya existe'
+            )
 
     def test_ingresar_usuario(self):
         seguridad = Seguridad()
