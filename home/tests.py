@@ -37,7 +37,7 @@ class TestSeguridad(unittest.TestCase):
             'PasswordCo123': True,
         }
         for key in passwords:
-            self.assertEqual(seguridad.clave_valida(key), passwords['key'])
+            self.assertEqual(seguridad.clave_valida(key), passwords[key])
 
     def test_registrar_usuario(self):
         seguridad = Seguridad()
@@ -53,9 +53,9 @@ class TestSeguridad(unittest.TestCase):
 
         for correo in credenciales:
             password1, password2, msg = credenciales[correo]
-            self.assertEqual(seguridad3.registrarUsuario(correo, password1, password2), msg)
+            self.assertEqual(seguridad.registrarUsuario(correo, password1, password2), msg)
 
-        self.assertTrue(len(seguridad3.usuariosRegistrados.keys()) == 1)
+        self.assertTrue(len(seguridad.usuariosRegistrados.keys()) == 1)
 
     def test_ingresar_usuario(self):
         seguridad = Seguridad()
